@@ -3,7 +3,7 @@
     public class Game
     {
         private static Player Player = new();
-        private static readonly Overworld Overworld = new(Player);
+        private static Overworld Overworld = new(Player);
         private static float textpeed = 1;
         
         private static readonly List<string> BannedNames =
@@ -22,6 +22,8 @@
 
         public static void Main()
         {
+            Player = new Player();
+            Overworld = new Overworld(Player);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             WriteLines("Do you remember your name?", 100);
