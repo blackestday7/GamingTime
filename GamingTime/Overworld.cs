@@ -41,24 +41,24 @@ public class Overworld
                         default:
                             break;
                         case 0:
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
-                                random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 3 + ((i + j) * 2)),
+                                random.Next(6 + i + j), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), 1));
                             break;
                         case 1:
                             break;
                         case 2:
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
-                                random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
-                                random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 3 + ((i + j) * 2)),
+                                random.Next(6 + i + j), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), 1));
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 3 + ((i + j) * 2)),
+                                random.Next(6 + i + j), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), 1));
                             break;
                         case 3:
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
-                                random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
-                                random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
-                                random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 3 + ((i + j) * 2)),
+                                random.Next(6 + i + j), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), 1));
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 3 + ((i + j) * 2)),
+                                random.Next(6 + i + j), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), 1));
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 3 + ((i + j) * 2)),
+                                random.Next(6 + i + j), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), random.Next(1, 1 + ((i + j))), 1));
                             break;
                     }
                 }
@@ -183,14 +183,14 @@ public class Overworld
         if (key == ConsoleKey.L) 
         {
                 AAAA = player.Atk - CurrentMap.Enemies[f].Def +
-                       random.Next(-player.Lvl, player.Lvl) + random.Next(-player.Lvl, player.Lvl);
+                       random.Next(-player.Lvl, player.Lvl + 1) + random.Next(-player.Lvl, player.Lvl + 1);
                 Acc = random.Next(0, 7) + player.Spd - enem.Spd; 
         }
         else
         {
                 AAAA = player.Atk - CurrentMap.Enemies[f].Def +
-                       random.Next(-player.Lvl + 1, player.Lvl + 1) + random.Next(-player.Lvl + 1, player.Lvl + 1);
-                Acc = random.Next(-2, 3) + player.Spd - enem.Spd;
+                       random.Next(-player.Lvl + 1, player.Lvl + 2) + random.Next(-player.Lvl + 1, player.Lvl + 2);
+                Acc = random.Next(0, 3) + player.Spd - enem.Spd;
         }
         if (Acc <= 0)
         {
