@@ -26,14 +26,14 @@
             Overworld = new Overworld(Player);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
-            WriteLines("Do you remember your name?", 100);
+            WriteLines("What's your name again?", 100);
             while (Player.PlayerName == "placeholder")
             {
                 Player.PlayerName = Console.ReadLine();
                 if (Player.PlayerName != null && (Player.PlayerName.Length > 12 || Player.PlayerName.Length < 3 || BannedNames.Contains(Player.PlayerName.ToLower())))
                 {
                     Player.PlayerName = "placeholder";
-                    WriteLines("I do not believe that is your name.", 100);
+                    WriteLines("No, it isn't", 100);
                 }
             }
             WriteLines("Are you a fast reader?", 100);
@@ -52,14 +52,15 @@
             {
                 textpeed = 1;
             }
-            WriteLines($"{Player.PlayerName}, a quest awaits you.", 100);
+            WriteLines($"{Player.PlayerName}, do you remember what happened?", 100);
+            WriteLines("Jerry stole your wife, your kids, your eggs, your grass, your underwear and even your floor", 100);
             Thread.Sleep(500);
-            WriteLines("Wake up.", 500);
+            WriteLines("Kill him.", 500);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Gray;
-            WriteLines("You wake up in a forest", 50);
+            WriteLines("You are in a forest", 50);
             Thread.Sleep(500);
-            WriteLines("You don't remember much, but there are some unrule figures heading your way", 50);
+            WriteLines("You spot Jerry nearby", 50);
             Overworld.Run(Player);
         }
 

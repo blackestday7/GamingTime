@@ -211,7 +211,37 @@ public class Overworld
         if (CurrentMap.Enemies[f].Hp <= 0)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Game.WriteLines($"{CurrentMap.Enemies[f].EnemyName} died a pitiful death", 50);
+            if (CurrentMap.Enemies[f].EnemyName == "Jerry" || CurrentMap.Enemies[f].EnemyName == "Jerry-Gear 2" ||
+                CurrentMap.Enemies[f].EnemyName == "Jerry-Gear 3" || CurrentMap.Enemies[f].EnemyName == "Jerry-Gear 4")
+            {
+                Game.WriteLines("Jerry ran away.", 50);
+            }
+            else if (CurrentMap.Enemies[f].EnemyName == "Jerry-Gear 5")
+            {
+                Game.WriteLines("You finally took your revenge.", 100);
+                Game.WriteLines("Jerry is dead, but so are your wife and kids.", 100);
+                Game.WriteLines("Welp, time to find a new wife.", 100);
+                Game.WriteLines("Play again?", 100);
+                Game.WriteLines("Y | N", 100);
+                var gey = Console.ReadKey().Key;
+                while (!(gey == ConsoleKey.Y || gey == ConsoleKey.N))
+                { 
+                    Game.WriteLines("Make up your mind!", 50);
+                    gey = Console.ReadKey().Key;
+                }
+                if (gey == ConsoleKey.Y)
+                {
+                    Game.Main();
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
+            else
+            {
+                Game.WriteLines($"{CurrentMap.Enemies[f].EnemyName} died a pitiful death", 50);
+            }
             Console.ForegroundColor = ConsoleColor.Gray;
             var b = (int)Math.Ceiling(CurrentMap.Enemies[f].Lvl *
                                     ((CurrentMap.Coords.X + CurrentMap.Coords.Y + 1) / 2));
