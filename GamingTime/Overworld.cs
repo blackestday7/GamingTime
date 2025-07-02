@@ -169,10 +169,36 @@ public class Overworld
             Game.WriteLines("That is not a valid enemy", 50);
             return;
         }
-        var AAAA = player.Atk - CurrentMap.Enemies[f].Def + (random.Next(-player.Lvl + 1, player.Lvl + 1) + random.Next(-player.Lvl + 1, player.Lvl + 1));
-        if (AAAA <= 0)
+        Game.WriteLines("Choose your attack:", 50);
+        Game.WriteLines("L: Light Attack", 50);
+        Game.WriteLines("H: Heavy Attack", 50);
+        var key =  Console.ReadKey(true).Key;
+        int AAAA = 0;
+        int Acc = 0;
+        while (key != ConsoleKey.L || key != ConsoleKey.H)
+        {
+            Game.WriteLines("Not a valid Attack", 50);
+            key =  Console.ReadKey(true).Key;
+        }
+        if (key == ConsoleKey.L)
+        {
+            AAAA = player.Atk - CurrentMap.Enemies[f].Def +
+                   random.Next(-player.Lvl, player.Lvl) + random.Next(-player.Lvl, player.Lvl);
+            Acc = random.Next(0, 7) + player.Spd - enem.Spd;
+        }
+        else if (key == ConsoleKey.H)
+        {
+            AAAA = player.Atk - CurrentMap.Enemies[f].Def + 
+                   random.Next(-player.Lvl + 1, player.Lvl + 1) + random.Next(-player.Lvl + 1, player.Lvl + 1);
+            Acc = random.Next(-2, 3) + player.Spd - enem.Spd;
+        }
+        if (Acc <= 0)
         {
             Game.WriteLines("You missed!", 50);
+        }
+        else if (AAAA <= 0)
+        {
+            Game.WriteLines("They blocked!", 50);
         }
         else
         {
@@ -194,11 +220,13 @@ public class Overworld
             if (player.Exp >= player.ExpVec)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Game.WriteLines("You leveled up! Don't forget to check your new stats", 50);
-                Console.ForegroundColor = ConsoleColor.Gray;
-                var levels = new Player().LevelupStats();
+                Game.WriteLines("You leveled up! Don't forget to use your new stat points", 50);
                 player.Exp -= player.ExpVec;
-                player.Stat_points += random.Next(2, 8);
+                var r = random.Next(2, 8);
+                player.Stat_points += r;
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Game.WriteLines($"You got {r} stat points", 50);
+                Console.ForegroundColor = ConsoleColor.Gray;
                 player.ExpVec = (int)Math.Ceiling(Math.Pow((double)player.ExpVec, 1.1));
             }
             CurrentMap.Enemies.RemoveAt(f);
@@ -208,9 +236,14 @@ public class Overworld
         foreach (var menem in CurrentMap.Enemies)
         {
             var h = menem.Atk - player.Def;
-            if (h <= 0)
+            var hAcc = menem.Spd - player.Spd;
+            if (hAcc <= 0)
             {
                 Game.WriteLines($"{menem.EnemyName} missed", 50);
+            }
+            else if (h <= 0)
+            {
+                Game.WriteLines("You blocked the hit", 50);
             }
             else
             {
