@@ -66,6 +66,7 @@ public class Command
                 break;
             case(CommandType.Move):
                 Overworld.Move();
+                Overworld.player.Hp = Overworld.player.MaxHp;
                 break;
             case(CommandType.Quit):
                 Game.WriteLines("Goodbye", 250);

@@ -71,12 +71,24 @@ public class Overworld
     public Command Command = new Command(player);
     public void Run(Player player)
     {
-        while(player.Hp != 0)
+        while(player.Hp > 0)
         {
             Game.WriteLines("What are you going to do?", 50);
             Thread.Sleep(500);
             Game.WriteLines("A: Attack | M: Move | Q: Quit | C: Check | S: Status", 50);
             Command.CheckCommand(Console.ReadKey(true).Key);
+        }
+        Game.WriteLines("You can't die yet, Get up....", 200);
+        Game.WriteLines("Continue?", 100);
+        Game.WriteLines("Y | N", 100);
+        var key =  Console.ReadKey(true).Key;
+        if (key == ConsoleKey.Y)
+        {
+            Game.Main();
+        }
+        if (key == ConsoleKey.N)
+        {
+            Environment.Exit(0);
         }
     }
 
@@ -84,7 +96,7 @@ public class Overworld
     {
         Game.WriteLines("In which direction?", 50);
         Game.WriteLines("N: North | S: South | E: East | W: West", 50);
-        var direction = Console.ReadKey().Key;
+        var direction = Console.ReadKey(true).Key;
         switch (direction)
         {
             default:
@@ -142,7 +154,7 @@ public class Overworld
             i = j + ": " + enemy.EnemyName + " hp: " + enemy.Hp + ".";
             Game.WriteLines(i, 50);
         }
-        var EtA = Console.ReadKey().KeyChar;
+        var EtA = Console.ReadKey(true).KeyChar;
         int f = GetNumber(EtA) - 1;
         
         if (f >= CurrentMap.Enemies.Count || f < 0)

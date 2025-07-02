@@ -7,6 +7,7 @@ public class Player
     public Random rand = new Random();
     public string PlayerName;
     public int Hp;
+    public int MaxHp;
     public int Mp;
     public int Lvl;
     public int Exp;
@@ -21,6 +22,7 @@ public class Player
     public Player()
     {
         PlayerName = "placeholder";
+        MaxHp = 12;
         Hp = 12;
         Mp = 5;
         Lvl = 1;
