@@ -41,23 +41,23 @@ public class Overworld
                         default:
                             break;
                         case 0:
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(10 + ((i + j) * 2)),
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
                                 random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
                             break;
                         case 1:
                             break;
                         case 2:
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(10 + ((i + j) * 2)),
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
                                 random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(10 + ((i + j) * 2)),
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
                                 random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
                             break;
                         case 3:
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(10 + ((i + j) * 2)),
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
                                 random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(10 + ((i + j) * 2)),
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
                                 random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
-                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(10 + ((i + j) * 2)),
+                            Map[i, j].Enemies.Add(new Enemy(enem.EnemyNames[random.Next(16)], random.Next(1, 10 + ((i + j) * 2)),
                                 random.Next(6 + i + j), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), random.Next(1, 3 + ((i + j) / 2)), 1));
                             break;
                     }
@@ -66,6 +66,10 @@ public class Overworld
         }
         player.Coords = new Vector2(0, 0);
         Map[0, 0].Enemies.Add(new Enemy("Jerry", 2, 1, 1, 0, 0, 0));
+        Map[1, 1].Enemies.Add(new Enemy("Jerry-Gear 2", 4, 2, 2, 2, 2, 2));
+        Map[2, 2].Enemies.Add(new Enemy("Jerry-Gear 3", 8, 3, 3, 4, 4, 4));
+        Map[3, 3].Enemies.Add(new Enemy("Jerry-Gear 4", 12, 5, 4, 7, 6, 5));
+        Map[4, 4].Enemies.Add(new Enemy("Jerry-Gear 5", 20, 10, 5, 13, 11, 10));
         CurrentMap = Map[0, 0];
     }
     public Command Command = new Command(player);
@@ -162,7 +166,7 @@ public class Overworld
             Game.WriteLines("That is not a valid enemy", 50);
             return;
         }
-        var AAAA = player.Atk - CurrentMap.Enemies[f].Def + (random.Next(-player.Lvl, player.Lvl + 1) + random.Next(-player.Lvl, player.Lvl + 1));
+        var AAAA = player.Atk - CurrentMap.Enemies[f].Def + (random.Next(-player.Lvl + 1, player.Lvl + 1) + random.Next(-player.Lvl + 1, player.Lvl + 1));
         if (AAAA <= 0)
         {
             Game.WriteLines("You missed!", 50);
@@ -180,7 +184,7 @@ public class Overworld
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Game.WriteLines($"{CurrentMap.Enemies[f].EnemyName} died a pitiful death", 50);
             Console.ForegroundColor = ConsoleColor.Gray;
-            var b = (int)Math.Floor(CurrentMap.Enemies[f].Lvl *
+            var b = (int)Math.Ceiling(CurrentMap.Enemies[f].Lvl *
                                     ((CurrentMap.Coords.Length() + 1) / (CurrentMap.Coords.X + CurrentMap.Coords.Y + 1)));
             player.Exp += b;
             Game.WriteLines($"You gained {b} Exp", 50);
@@ -190,9 +194,9 @@ public class Overworld
                 Game.WriteLines("You leveled up! Don't forget to check your new stats", 50);
                 Console.ForegroundColor = ConsoleColor.Gray;
                 var levels = new Player().LevelupStats();
-                player.Exp = 0;
-                player.Stat_points += random.Next(1, 6);
-                player.ExpVec = (int)Math.Ceiling(Math.Pow((double)player.ExpVec, 1.25));
+                player.Exp -= player.ExpVec;
+                player.Stat_points += random.Next(2, 8);
+                player.ExpVec = (int)Math.Ceiling(Math.Pow((double)player.ExpVec, 1.1));
             }
             CurrentMap.Enemies.RemoveAt(f);
         }
@@ -201,8 +205,7 @@ public class Overworld
         foreach (var menem in CurrentMap.Enemies)
         {
             var h = menem.Atk - player.Def;
-            var doge = menem.Spd - player.Spd + random.Next(0, 3);
-            if (h <= 0 || doge <= 0)
+            if (h <= 0)
             {
                 Game.WriteLines($"{menem.EnemyName} missed", 50);
             }
