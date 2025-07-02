@@ -1,0 +1,14 @@
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\GamingTime.GeneratedMSBuildEditorConfig.editorconfig
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\GamingTime.AssemblyInfoInputs.cache
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\GamingTime.AssemblyInfo.cs
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\GamingTime.csproj.CoreCompileInputs.cache
+D:\jetbrains\GamingTime\GamingTime\bin\Debug\net8.0\GamingTime.exe
+D:\jetbrains\GamingTime\GamingTime\bin\Debug\net8.0\GamingTime.deps.json
+D:\jetbrains\GamingTime\GamingTime\bin\Debug\net8.0\GamingTime.runtimeconfig.json
+D:\jetbrains\GamingTime\GamingTime\bin\Debug\net8.0\GamingTime.dll
+D:\jetbrains\GamingTime\GamingTime\bin\Debug\net8.0\GamingTime.pdb
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\GamingTime.dll
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\refint\GamingTime.dll
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\GamingTime.pdb
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\GamingTime.genruntimeconfig.cache
+D:\jetbrains\GamingTime\GamingTime\obj\Debug\net8.0\ref\GamingTime.dll
