@@ -1,5 +1,0 @@
-D:\jetbrains\GamingTime\GamingTime\bin\Release\net8.0\publish\GamingTime.exe
-D:\jetbrains\GamingTime\GamingTime\bin\Release\net8.0\publish\GamingTime.dll
-D:\jetbrains\GamingTime\GamingTime\bin\Release\net8.0\publish\GamingTime.deps.json
-D:\jetbrains\GamingTime\GamingTime\bin\Release\net8.0\publish\GamingTime.runtimeconfig.json
-D:\jetbrains\GamingTime\GamingTime\bin\Release\net8.0\publish\GamingTime.pdb
