@@ -57,6 +57,7 @@
             WriteLines("Jerry stole your wife, your kids, your eggs, your grass, your underwear and even your floor", 100);
             Thread.Sleep(500);
             WriteLines("Kill him.", 500);
+            Thread.Sleep(500);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Gray;
             WriteLines("You are in a forest", 50);
