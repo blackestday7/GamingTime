@@ -37,6 +37,7 @@
                 }
             }
             WriteLines("Are you a fast reader?", 100);
+            WriteLines("Y | N", 100);
             var s = Console.ReadKey(true).Key;
             while (!(s == ConsoleKey.Y || s == ConsoleKey.N))
             {
