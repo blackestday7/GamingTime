@@ -172,25 +172,25 @@ public class Overworld
         Game.WriteLines("Choose your attack:", 50);
         Game.WriteLines("L: Light Attack", 50);
         Game.WriteLines("H: Heavy Attack", 50);
-        var key =  Console.ReadKey(true).Key;
+        var key = Console.ReadKey(true).Key;
         int AAAA = 0;
         int Acc = 0;
-        while (key != ConsoleKey.L || key != ConsoleKey.H)
+        while (!(key == ConsoleKey.L || key == ConsoleKey.H))
         {
-            Game.WriteLines("Not a valid Attack", 50);
-            key =  Console.ReadKey(true).Key;
+            Game.WriteLines("Not a valid attack", 50);
+            key = Console.ReadKey(true).Key;
         }
-        if (key == ConsoleKey.L)
+        if (key == ConsoleKey.L) 
         {
-            AAAA = player.Atk - CurrentMap.Enemies[f].Def +
-                   random.Next(-player.Lvl, player.Lvl) + random.Next(-player.Lvl, player.Lvl);
-            Acc = random.Next(0, 7) + player.Spd - enem.Spd;
+                AAAA = player.Atk - CurrentMap.Enemies[f].Def +
+                       random.Next(-player.Lvl, player.Lvl) + random.Next(-player.Lvl, player.Lvl);
+                Acc = random.Next(0, 7) + player.Spd - enem.Spd; 
         }
-        else if (key == ConsoleKey.H)
+        else
         {
-            AAAA = player.Atk - CurrentMap.Enemies[f].Def + 
-                   random.Next(-player.Lvl + 1, player.Lvl + 1) + random.Next(-player.Lvl + 1, player.Lvl + 1);
-            Acc = random.Next(-2, 3) + player.Spd - enem.Spd;
+                AAAA = player.Atk - CurrentMap.Enemies[f].Def +
+                       random.Next(-player.Lvl + 1, player.Lvl + 1) + random.Next(-player.Lvl + 1, player.Lvl + 1);
+                Acc = random.Next(-2, 3) + player.Spd - enem.Spd;
         }
         if (Acc <= 0)
         {
