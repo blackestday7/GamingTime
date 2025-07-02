@@ -75,7 +75,7 @@ public class Overworld
         };
         CurrentMap = Map[0, 0];
     }
-    public Command Command = new Command(player);
+    public Command Command = new Command();
     public void Run(Player player)
     {
         while(player.Hp > 0)

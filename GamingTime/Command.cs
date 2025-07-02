@@ -13,12 +13,7 @@ public class Command
         Status,
         Wrong
     } 
-    public Player player;
     public CommandType Commando;
-    public Command(Player _player)
-    {
-        player = _player;
-    }
 
     public void CheckCommand(ConsoleKey command)
     {
