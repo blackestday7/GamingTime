@@ -218,6 +218,7 @@ public class Overworld
             }
             else if (CurrentMap.Enemies[f].EnemyName == "Jerry-Gear 5")
             {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Game.WriteLines("You finally took your revenge.", 100);
                 Game.WriteLines("Jerry is dead, but so are your wife and kids.", 100);
                 Game.WriteLines("Welp, time to find a new wife.", 100);
