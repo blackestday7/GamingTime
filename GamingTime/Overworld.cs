@@ -235,20 +235,38 @@ public class Overworld
         Game.WriteLines("But the enemy fights back!", 50);
         foreach (var menem in CurrentMap.Enemies)
         {
-            var run = random.Next(1, 3);
-            int h = 0;
-            int hAcc = 0;
-            if (run == 1)
+            var run = player.Def - player.Spd;
+            if (run < 0)
+            {
+                run = random.Next(-10, 4);
+            }
+            else if (run > 0)
+            {
+                run = random.Next(-3, 11);
+            }
+            else
+            {
+                run = random.Next(-10, 11);
+            }
+            int h;
+            int hAcc;
+            if (run > 0)
             {
                 h = menem.Atk - player.Def + random.Next(-menem.Lvl + 1, menem.Lvl + 1);
                 hAcc = menem.Spd - player.Spd + random.Next(-menem.Lvl, menem.Lvl);
                 Game.WriteLines($"{menem.EnemyName} did a heavy attack", 50);
             }
-            else if (run == 2)
+            else if (run < 0)
             {
                 h = menem.Atk - player.Def + random.Next(-menem.Lvl, menem.Lvl);
                 hAcc = menem.Spd - player.Spd + random.Next(-menem.Lvl + 1, menem.Lvl + 1);
                 Game.WriteLines($"{menem.EnemyName} did a light attack", 50);
+            }
+            else
+            {
+                h = menem.Atk - player.Def + random.Next(-menem.Lvl, menem.Lvl);
+                hAcc = menem.Spd - player.Spd + random.Next(-menem.Lvl, menem.Lvl);
+                Game.WriteLines($"{menem.EnemyName} did a clumsy attack", 50);
             }
             if (hAcc <= 0)
             {
