@@ -66,10 +66,13 @@ public class Overworld
         }
         player.Coords = new Vector2(0, 0);
         Map[0, 0].Enemies.Add(new Enemy("Jerry", 2, 1, 1, 0, 0, 0));
-        Map[1, 1].Enemies.Add(new Enemy("Jerry-Gear 2", 4, 2, 2, 2, 2, 2));
-        Map[2, 2].Enemies.Add(new Enemy("Jerry-Gear 3", 8, 3, 3, 4, 4, 4));
-        Map[3, 3].Enemies.Add(new Enemy("Jerry-Gear 4", 12, 5, 4, 7, 6, 5));
-        Map[4, 4].Enemies.Add(new Enemy("Jerry-Gear 5", 20, 10, 5, 13, 11, 10));
+        Map[1, 1].Enemies.Add(new Enemy("Jerry-Gear 2", 6, 2, 2, 2, 2, 2));
+        Map[2, 2].Enemies.Add(new Enemy("Jerry-Gear 3", 12, 3, 3, 4, 4, 4));
+        Map[3, 3].Enemies.Add(new Enemy("Jerry-Gear 4", 18, 5, 4, 7, 6, 5));
+        Map[4, 4].Enemies = new List<Enemy>()
+        {
+            new Enemy("Jerry-Gear 5", 30, 10, 5, 13, 11, 10)
+        };
         CurrentMap = Map[0, 0];
     }
     public Command Command = new Command(player);
