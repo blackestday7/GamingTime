@@ -214,7 +214,7 @@ public class Overworld
             Game.WriteLines($"{CurrentMap.Enemies[f].EnemyName} died a pitiful death", 50);
             Console.ForegroundColor = ConsoleColor.Gray;
             var b = (int)Math.Ceiling(CurrentMap.Enemies[f].Lvl *
-                                    ((CurrentMap.Coords.Length() + 1) / (CurrentMap.Coords.X + CurrentMap.Coords.Y + 1)));
+                                    ((CurrentMap.Coords.X + CurrentMap.Coords.Y + 1) / 2));
             player.Exp += b;
             Game.WriteLines($"You gained {b} Exp", 50);
             if (player.Exp >= player.ExpVec)
@@ -235,8 +235,21 @@ public class Overworld
         Game.WriteLines("But the enemy fights back!", 50);
         foreach (var menem in CurrentMap.Enemies)
         {
-            var h = menem.Atk - player.Def;
-            var hAcc = menem.Spd - player.Spd;
+            var run = random.Next(1, 3);
+            int h = 0;
+            int hAcc = 0;
+            if (run == 1)
+            {
+                h = menem.Atk - player.Def + random.Next(-menem.Lvl + 1, menem.Lvl + 1);
+                hAcc = menem.Spd - player.Spd + random.Next(-menem.Lvl, menem.Lvl);
+                Game.WriteLines($"{menem.EnemyName} did a heavy attack", 50);
+            }
+            else if (run == 2)
+            {
+                h = menem.Atk - player.Def + random.Next(-menem.Lvl, menem.Lvl);
+                hAcc = menem.Spd - player.Spd + random.Next(-menem.Lvl + 1, menem.Lvl + 1);
+                Game.WriteLines($"{menem.EnemyName} did a light attack", 50);
+            }
             if (hAcc <= 0)
             {
                 Game.WriteLines($"{menem.EnemyName} missed", 50);
