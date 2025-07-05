@@ -2,9 +2,9 @@
 {
     public class Game
     {
-        private static Player Player = new();
-        private static Overworld Overworld = new(Player);
-        private static float textpeed = 1;
+        private static Player _player = new();
+        private static Overworld _overworld = new(_player);
+        private static float _textSpeed = 1;
         
         private static readonly List<string> BannedNames =
         [
@@ -17,22 +17,22 @@
 
         public Game(Player player)
         {
-            Player = player;
+            _player = player;
         }
 
         public static void Main()
         {
-            Player = new Player();
-            Overworld = new Overworld(Player);
+            _player = new Player();
+            _overworld = new Overworld(_player);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             WriteLines("What's your name again?", 100);
-            while (Player.PlayerName == "placeholder")
+            while (_player.PlayerName == "placeholder")
             {
-                Player.PlayerName = Console.ReadLine();
-                if (Player.PlayerName != null && (Player.PlayerName.Length > 12 || Player.PlayerName.Length < 3 || BannedNames.Contains(Player.PlayerName.ToLower())))
+                _player.PlayerName = Console.ReadLine()!;
+                if (_player.PlayerName.Length > 12 || _player.PlayerName.Length < 3 || BannedNames.Contains(_player.PlayerName.ToLower()))
                 {
-                    Player.PlayerName = "placeholder";
+                    _player.PlayerName = "placeholder";
                     WriteLines("No, it isn't", 100);
                 }
             }
@@ -47,13 +47,13 @@
             }
             if (s == ConsoleKey.Y)
             {
-                textpeed = (float)0.5;
+                _textSpeed = (float)0.5;
             }
             if (s == ConsoleKey.N)
             {
-                textpeed = 1;
+                _textSpeed = 1;
             }
-            WriteLines($"{Player.PlayerName}, do you remember what happened?", 100);
+            WriteLines($"{_player.PlayerName}, do you remember what happened?", 100);
             WriteLines("Jerry stole your wife, your kids, your eggs, your grass, your underwear and even your floor", 100);
             Thread.Sleep(500);
             WriteLines("Kill him.", 500);
@@ -63,7 +63,7 @@
             WriteLines("You are in a forest", 50);
             Thread.Sleep(500);
             WriteLines("You spot Jerry nearby", 50);
-            Overworld.Run(Player);
+            _overworld.Run(_player);
         }
 
         public static void WriteLines(string text, int textSpeed)
@@ -71,7 +71,7 @@
             foreach (var line in text.ToList())
             {
                 Console.Write(line);
-                Thread.Sleep((int)(textSpeed * textpeed));
+                Thread.Sleep((int)(textSpeed * _textSpeed));
             }
             Console.WriteLine();
         }

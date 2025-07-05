@@ -1,10 +1,8 @@
-using System.Collections.Immutable;
-
 namespace GamingTime;
 
 public class Command
 {
-    public enum CommandType
+    private enum CommandType
     {
         Attack,
         Move,
@@ -12,8 +10,9 @@ public class Command
         Check,
         Status,
         Wrong
-    } 
-    public CommandType Commando;
+    }
+
+    private CommandType _commando;
 
     public void CheckCommand(ConsoleKey command)
     {
@@ -21,47 +20,45 @@ public class Command
         {
             default:
                 Game.WriteLines("Not a valid command", 50);
-                Commando = CommandType.Wrong;
+                _commando = CommandType.Wrong;
                 Game.WriteLines("balls", 50);
                 break;
             case(ConsoleKey.A):
-                Commando = CommandType.Attack;
+                _commando = CommandType.Attack;
                 break;
             case(ConsoleKey.M):
-                Commando = CommandType.Move;
+                _commando = CommandType.Move;
                 break;
             case(ConsoleKey.Q):
-                Commando = CommandType.Quit;
+                _commando = CommandType.Quit;
                 break;
             case(ConsoleKey.C):
-                Commando = CommandType.Check;
+                _commando = CommandType.Check;
                 break;
             case(ConsoleKey.S):
-                Commando = CommandType.Status;
+                _commando = CommandType.Status;
                 break;
         }
-        if (Commando == CommandType.Wrong)
+        if (_commando == CommandType.Wrong)
         {
             return;
         }
-        DoCommand(Commando);
+        DoCommand(_commando);
     }
 
-    public void DoCommand(CommandType command)
+    private void DoCommand(CommandType command)
     {
         switch (command)
         {
-            default:
-                break;
             case(CommandType.Attack):
-                if (Overworld.CurrentMap.Enemies.Count > 0)
+                if (Overworld.CurrentMap.Enemies!.Count > 0)
                 {
                     Overworld.Attack();
                 }
                 break;
             case(CommandType.Move):
                 Overworld.Move();
-                Overworld.player.Hp = Overworld.player.MaxHp;
+                Overworld.Player.Hp = Overworld.Player.MaxHp;
                 break;
             case(CommandType.Quit):
                 Game.WriteLines("Goodbye", 250);
@@ -70,35 +67,34 @@ public class Command
                 break;
             case(CommandType.Check):
                 string names = "";
-                foreach (Enemy enemy in Overworld.CurrentMap.Enemies)
+                foreach (Enemy enemy in Overworld.CurrentMap.Enemies!)
                 {
                     names = names + enemy.EnemyName + " " + enemy.Hp + "hp, ";
                 }
-                if(names.Count() > 0)
+                if(names.Any())
                     names.Remove(names.Count() - 1);
                 Game.WriteLines($"Enemies: {names}", 50);
-                Game.WriteLines($"Coords: {Overworld.CurrentMap.Coords.X}, {Overworld.CurrentMap.Coords.Y}", 50);
+                Game.WriteLines($"Coords: {Overworld.CurrentMap.Coords.Item1}, {Overworld.CurrentMap.Coords.Item2}", 50);
                 break;
             case (CommandType.Status):
-                bool status = true;
-                Game.WriteLines($"Level: {Overworld.player.Lvl}", 50);
-                Game.WriteLines($"Exp: {Overworld.player.Exp}", 50);
-                Game.WriteLines($"Exp to next level: {Overworld.player.ExpVec - Overworld.player.Exp}", 50);
-                Game.WriteLines($"Hp: {Overworld.player.Hp}", 50);
-                Game.WriteLines($"Mp: {Overworld.player.Mp}", 50);
-                Game.WriteLines($"Atk: {Overworld.player.Atk}", 50);
-                Game.WriteLines($"Def: {Overworld.player.Def}", 50);
-                Game.WriteLines($"Spd: {Overworld.player.Spd}", 50);
-                if (Overworld.player.Stat_points > 0)
+                Game.WriteLines($"Level: {Overworld.Player.Lvl}", 50);
+                Game.WriteLines($"Exp: {Overworld.Player.Exp}", 50);
+                Game.WriteLines($"Exp to next level: {Overworld.Player.ExpVec - Overworld.Player.Exp}", 50);
+                Game.WriteLines($"Hp: {Overworld.Player.Hp}", 50);
+                Game.WriteLines($"Mp: {Overworld.Player.Mp}", 50);
+                Game.WriteLines($"Atk: {Overworld.Player.Atk}", 50);
+                Game.WriteLines($"Def: {Overworld.Player.Def}", 50);
+                Game.WriteLines($"Spd: {Overworld.Player.Spd}", 50);
+                if (Overworld.Player.StatPoints > 0)
                 {
-                        Game.WriteLines($"You have {Overworld.player.Stat_points} unused stat points", 50);
+                        Game.WriteLines($"You have {Overworld.Player.StatPoints} unused stat points", 50);
                         Game.WriteLines("I: Use stat points", 50);
                         Game.WriteLines("E: Don't use stat points", 50);
                         var k = Console.ReadKey(true).Key;
                         if (k == ConsoleKey.I)
                         {
                             bool quit = true;
-                            while (Overworld.player.Stat_points > 0 && quit)
+                            while (Overworld.Player.StatPoints > 0 && quit)
                             {
                                 Game.WriteLines("A: Atk", 50);
                                 Game.WriteLines("D: Def", 50);
@@ -106,28 +102,28 @@ public class Command
                                 Game.WriteLines("H: Hp", 50);
                                 Game.WriteLines("M: Mp", 50);
                                 Game.WriteLines("Q: quit", 50);
-                                k = Console.ReadKey().Key;
+                                k = Console.ReadKey(true).Key;
                                 switch (k)
                                 {
                                     case ConsoleKey.A:
-                                        Overworld.player.Atk++;
-                                        Overworld.player.Stat_points--;
+                                        Overworld.Player.Atk++;
+                                        Overworld.Player.StatPoints--;
                                         break;
                                     case ConsoleKey.D:
-                                        Overworld.player.Def++;
-                                        Overworld.player.Stat_points--;
+                                        Overworld.Player.Def++;
+                                        Overworld.Player.StatPoints--;
                                         break;
                                     case ConsoleKey.S:
-                                        Overworld.player.Spd++;
-                                        Overworld.player.Stat_points--;
+                                        Overworld.Player.Spd++;
+                                        Overworld.Player.StatPoints--;
                                         break;
                                     case ConsoleKey.H:
-                                        Overworld.player.Hp += 2;
-                                        Overworld.player.Stat_points--;
+                                        Overworld.Player.Hp += 2;
+                                        Overworld.Player.StatPoints--;
                                         break;
                                     case ConsoleKey.M:
-                                        Overworld.player.Mp++;
-                                        Overworld.player.Stat_points--;
+                                        Overworld.Player.Mp++;
+                                        Overworld.Player.StatPoints--;
                                         break;
                                     case ConsoleKey.Q:
                                         quit = false;
@@ -135,10 +131,7 @@ public class Command
                                 }
                             }
                         }
-                        else if (k == ConsoleKey.E)
-                        {
-                            break;
-                        }
+                    
                 }
                 break;
         }

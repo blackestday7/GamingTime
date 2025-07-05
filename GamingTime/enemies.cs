@@ -1,25 +1,14 @@
 namespace GamingTime;
 
-public class Enemy
+public class Enemy(string enemyName, int hp, int mp, int lvl, int atk, int def, int spd)
 {
-    public string EnemyName;
-    public int Hp;
-    public int Mp;
-    public int Lvl;
-    public int Atk;
-    public int Def;
-    public int Spd;
+    public readonly string EnemyName = enemyName;
+    public int Hp = hp;
+    public int Mp = mp;
+    public readonly int Lvl = lvl;
+    public readonly int Atk = atk;
+    public readonly int Def = def;
+    public readonly int Spd = spd;
 
-    public Enemy(string enemyName, int hp, int mp, int lvl, int atk, int def, int spd)
-    {
-        EnemyName = enemyName;
-        Hp = hp;
-        Mp = mp;
-        Lvl = lvl;
-        Atk = atk;
-        Def = def;
-        Spd = spd;
-    }
-
-    public readonly List<string> EnemyNames = ["Fisher", "Walter", "Gert", "Slink", "Chris", "Connor", "Ruben", "Lars", "Eagle", "Starch", "Fern", "Horatio", "Sinda", "Liss", "Pascal", "Sploinky"];
+    public readonly List<string> EnemyNames = ["Fisher", "Walter", "Gert", "Slink", "Chris", "Connor", "Ruben", "Lars", "Eagle", "Starch", "Fern", "Horatio", "Sina", "Less", "Pascal", "Slinky"];
 }
